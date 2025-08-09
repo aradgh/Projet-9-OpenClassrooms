@@ -22,7 +22,7 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public Patient findById(@PathVariable Long id) {
+    public Patient findById(@PathVariable("id") Long id) {
         return patientService.findById(id);
     }
 
@@ -31,8 +31,9 @@ public class PatientController {
         return patientService.save(patient);
     }
 
-    @PutMapping
-    public Patient update(@RequestBody @Valid Patient patient) {
+    @PutMapping("/{id}")
+    public Patient update(@PathVariable("id") Long id, @RequestBody @Valid Patient patient) {
+        patient.setId(id);
         return patientService.save(patient);
     }
 
