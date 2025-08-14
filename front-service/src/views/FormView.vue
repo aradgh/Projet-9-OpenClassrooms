@@ -37,15 +37,15 @@ export default {
     }
   },
   methods: {
-    savePatient() {
+    async savePatient() {
       if (this.isEdit) {
-        api.updatePatient(this.$route.params.id, this.patient).then(() => {
-          this.$router.push('/patients');
+        await api.updatePatient(this.$route.params.id, this.patient).then(() => {
+          this.$router.push(`/patients/${this.patient.id}`);
         });
       } else {
-        api.createPatient(this.patient).then(() => {
-          this.$router.push('/patients');
-        });
+        const res = await api.createPatient(this.patient);
+        const newPatientId = res.data.id;
+        this.$router.push(`/patients/${newPatientId}`);
       }
     }
   }
