@@ -19,5 +19,11 @@ export default {
     },
     deletePatient(id) {
         return api.delete(`/patients/${id}`);
+    },
+    getPatientNotes(id) {
+        return api.get(`/notes/patient/${id}`);
+    },
+    addPatientNote(note) {
+        return api.post('/notes', note);
     }
 };
