@@ -31,10 +31,6 @@ export default {
     patId: {
       type: Number,
       required: true
-    },
-    patientName: {
-      type: String,
-      required: true
     }
   },
   data() {
@@ -57,7 +53,6 @@ export default {
       try {
         await api.addPatientNote({
           patId: this.patId,
-          patient: this.patientName,
           note: this.newNote
         });
         this.newNote = "";

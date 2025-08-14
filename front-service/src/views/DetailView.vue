@@ -11,7 +11,6 @@
     <PatientNotes
         v-if="patient.id"
         :patId="patient.id"
-        :patientName="patient.lastName"
     />
   </div>
 </template>

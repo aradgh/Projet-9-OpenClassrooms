@@ -10,6 +10,5 @@ public class Note {
     @Id
     private String id;       // généré par MongoDB
     private Long patId;
-    private String patient;
     private String note;
 }
