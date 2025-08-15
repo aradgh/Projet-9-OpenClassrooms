@@ -8,22 +8,25 @@ export default {
     getPatients() {
         return api.get('/patients');
     },
-    getPatient(id) {
-        return api.get(`/patients/${id}`);
+    getPatient(patientId) {
+        return api.get(`/patients/${patientId}`);
     },
     createPatient(patient) {
         return api.post('/patients', patient);
     },
-    updatePatient(id, patient) {
-        return api.put(`/patients/${id}`, patient);
+    updatePatient(patientId, patient) {
+        return api.put(`/patients/${patientId}`, patient);
     },
-    deletePatient(id) {
-        return api.delete(`/patients/${id}`);
+    deletePatient(patientId) {
+        return api.delete(`/patients/${patientId}`);
     },
-    getPatientNotes(id) {
-        return api.get(`/notes/patient/${id}`);
+    getPatientNotes(patientId) {
+        return api.get(`/notes/patient/${patientId}`);
     },
     addPatientNote(note) {
         return api.post('/notes', note);
+    },
+    getDiabetesReport(patientId) {
+        return api.get(`/reports/${patientId}`);
     }
 };
