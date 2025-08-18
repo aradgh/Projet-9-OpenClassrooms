@@ -57,6 +57,7 @@ export default {
         });
         this.newNote = "";
         await this.fetchNotes(); // recharge après ajout
+        this.$emit("note-added"); // avertit le parent
       } catch (err) {
         console.error("Erreur ajout note :", err);
       }

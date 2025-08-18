@@ -16,6 +16,7 @@
     <PatientNotes
         v-if="patient.id"
         :patId="patient.id"
+        @note-added="refreshRiskAssessment"
     />
   </div>
 </template>
@@ -38,12 +39,19 @@ export default {
     // Charger le patient
     api.getPatient(patientId).then(res => {
       this.patient = res.data;
+      // Charger le rapport de diabète
+      this.refreshRiskAssessment();
     });
 
-    // Charger le rapport de diabète
-    api.getDiabetesReport(patientId).then(res => {
-      this.riskAssessment = res.data.assessment;
-    });
+  },
+  methods: {
+    refreshRiskAssessment() {
+      if (this.patient.id) {
+        api.getDiabetesReport(this.patient.id).then(res => {
+          this.riskAssessment = res.data.assessment;
+        });
+      }
+    }
   }
 };
 </script>

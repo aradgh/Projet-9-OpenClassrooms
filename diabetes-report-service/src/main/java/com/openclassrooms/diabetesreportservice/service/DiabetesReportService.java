@@ -20,8 +20,8 @@ public class DiabetesReportService {
 
     // Liste des déclencheurs (tests FR)
     private static final List<String> TRIGGERS = Arrays.asList(
-        "hemoglobine a1c", "microalbumine", "taille", "poids", "fumeur", "fumeuse", "fumer", "fume", "anormal",
-        "cholesterol", "vertige", "rechute", "reaction", "anticorps"
+        "hemoglobine a1c", "microalbumine", "taille", "poids",
+        "fumeur", "fumeuse", "anormal", "cholesterol", "vertige", "rechute", "reaction", "anticorps"
     );
     private static final String RISK_NONE = "None";
     private static final String RISK_BORDERLINE = "Borderline";
@@ -94,7 +94,7 @@ public class DiabetesReportService {
 
     private boolean isInDanger(int age, String gender, int triggers) {
         if (age < 30) {
-            return ("M".equalsIgnoreCase(gender) && triggers >= 3) || ("F".equalsIgnoreCase(
+            return ("M".equalsIgnoreCase(gender) && triggers >= 3 && triggers < 5) || ("F".equalsIgnoreCase(
                 gender) && triggers >= 4 && triggers < 7);
         }
         return triggers == 6 || triggers == 7;
