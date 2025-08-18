@@ -1,17 +1,20 @@
 <template>
-  <div v-if="patient">
-    <h1>{{ patient.firstName }} {{ patient.lastName }}</h1>
-    <!-- Affichage du niveau de risque -->
-    <p v-if="riskAssessment">
+  <div v-if="patient" class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-4">
+    <h1 class="text-2xl font-bold text-blue-600">{{ patient.firstName }} {{ patient.lastName }}</h1>
+
+    <p v-if="riskAssessment" class="text-red-600 font-semibold">
       <strong>Risque de diabète :</strong> {{ riskAssessment }}
     </p>
 
-    <p>Date de naissance : {{ patient.dateOfBirth }}</p>
-    <p>Sexe : {{ patient.gender }}</p>
-    <p>Adresse : {{ patient.mailingAddress }}</p>
-    <p>Téléphone : {{ patient.phoneNumber }}</p>
+    <p><strong>Date de naissance :</strong> {{ patient.dateOfBirth }}</p>
+    <p><strong>Sexe :</strong> {{ patient.gender }}</p>
+    <p><strong>Adresse :</strong> {{ patient.mailingAddress }}</p>
+    <p><strong>Téléphone :</strong> {{ patient.phoneNumber }}</p>
 
-    <router-link :to="'/patients/' + patient.id + '/edit'">✏️ Modifier</router-link>
+    <router-link :to="'/patients/' + patient.id + '/edit'"
+                 class="inline-block bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 transition">✏️
+      Modifier
+    </router-link>
 
     <PatientNotes
         v-if="patient.id"

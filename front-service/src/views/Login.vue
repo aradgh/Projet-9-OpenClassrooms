@@ -1,21 +1,25 @@
 <template>
-  <div class="flex h-screen items-center justify-center bg-gray-100">
-    <div class="bg-white p-6 rounded-xl shadow-md w-96">
-      <h1 class="text-xl font-bold mb-4">Connexion</h1>
-      <form @submit.prevent="login">
-        <div class="mb-4">
+  <div class="flex items-center justify-center h-[80vh] bg-gray-100">
+    <div class="bg-white p-8 rounded-xl shadow-md w-96">
+      <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Connexion</h1>
+      <form class="" @submit.prevent="login">
+        <div>
           <label class="block text-sm font-medium mb-1">Utilisateur</label>
-          <input v-model="username" class="w-full border rounded p-2" required type="text"/>
+          <input v-model="username"
+                 class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required
+                 type="text"/>
         </div>
-        <div class="mb-4">
+        <div>
           <label class="block text-sm font-medium mb-1">Mot de passe</label>
-          <input v-model="password" class="w-full border rounded p-2" required type="password"/>
+          <input v-model="password"
+                 class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required
+                 type="password"/>
         </div>
-        <button class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" type="submit">
+        <button class="w-full bg-blue-500 text-white py-2 mt-5 rounded hover:bg-blue-600 transition" type="submit">
           Se connecter
         </button>
       </form>
-      <p v-if="error" class="text-red-500 text-sm mt-2">{{ error }}</p>
+      <p v-if="error" class="text-red-500 text-sm mt-2 text-center">{{ error }}</p>
     </div>
   </div>
 </template>
@@ -23,6 +27,7 @@
 <script>
 import axios from "axios";
 import router from "@/router";
+import {login as setLogin} from "@/services/auth.js"
 
 export default {
   name: "Login",
@@ -44,7 +49,7 @@ export default {
         });
 
         // Stocke le token
-        localStorage.setItem("authToken", token);
+        setLogin(token);
 
         // Redirige
         await router.push("/patients");
