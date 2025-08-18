@@ -222,6 +222,137 @@ docker-compose logs -f
 - ✅ Containerisation Docker
 - ✅ Données de test pré-chargées
 
+## 🌱 Green Code - Recommandations d'Amélioration
+
+Dans le cadre de la politique environnementale du client, voici les recommandations pour rendre le projet Mediscreen plus écoresponsable :
+
+### 🎯 Objectifs du Green Code
+Le Green Code vise à réduire l'impact environnemental des logiciels en optimisant la consommation d'énergie, l'utilisation des ressources et en prolongeant la durée de vie des équipements.
+
+### 📊 Audit Énergétique Actuel
+**Points d'amélioration identifiés :**
+- Architecture microservices multipliant les instances JVM
+- Utilisation de H2 en mémoire (consommation RAM)
+- Pas de mise en cache des données
+- Images Docker non optimisées
+- Absence de monitoring des ressources
+
+### 🛠️ Recommandations Techniques
+
+#### **1. Optimisation des Microservices Java/Spring Boot**
+```bash
+# Configuration JVM optimisée pour la production
+JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -XX:+UseStringDeduplication"
+```
+
+**Actions à mener :**
+- Configurer des limites mémoire appropriées pour chaque service
+- Utiliser GraalVM Native Image pour réduire l'empreinte mémoire de 70%
+- Implémenter Spring Boot 3 avec AOT (Ahead-of-Time compilation)
+- Activer la compression GZIP sur les API responses
+
+#### **2. Optimisation Base de Données**
+```sql
+-- Exemple d'optimisation MongoDB
+db.notes.createIndex({ "patId": 1, "createdDate": -1 })
+```
+
+**Actions à mener :**
+- Remplacer H2 par une base légère persistante (SQLite)
+- Optimiser les requêtes MongoDB avec des index appropriés
+- Implémenter la pagination pour limiter les transferts de données
+- Mettre en place un cache Redis pour les données fréquemment consultées
+
+#### **3. Optimisation Frontend Vue.js**
+**Actions à mener :**
+- Implémenter le lazy loading des composants
+- Optimiser les bundles avec Tree Shaking
+- Utiliser des images optimisées (WebP, compression)
+- Mettre en place un Service Worker pour le cache
+
+#### **4. Optimisation Docker**
+```dockerfile
+# Exemple d'image multi-stage optimisée
+FROM amazoncorretto:17-alpine AS builder
+# ... build steps ...
+
+FROM amazoncorretto:17-alpine-jre
+COPY --from=builder /app/target/app.jar app.jar
+CMD ["java", "-XX:+UseContainerSupport", "-jar", "app.jar"]
+```
+
+**Actions à mener :**
+- Utiliser des images Alpine Linux (90% plus légères)
+- Implémenter des images multi-stage pour réduire la taille
+- Configurer des health checks pour éviter les redémarrages inutiles
+- Utiliser des profils Spring pour optimiser selon l'environnement
+
+#### **5. Architecture et Code**
+**Actions à mener :**
+- Implémenter des circuit breakers pour éviter la sur-consommation
+- Optimiser les algorithmes d'évaluation du risque diabétique
+- Utiliser des structures de données efficaces (ArrayList vs LinkedList)
+- Implémenter des pools de connexions optimisés
+
+### 📈 Monitoring et Métriques
+**Outils recommandés :**
+- **Micrometer + Prometheus** : Monitoring des métriques JVM
+- **Grafana** : Visualisation de la consommation énergétique
+- **Spring Boot Actuator** : Health checks et métriques
+- **Docker stats** : Monitoring des ressources containers
+
+### 🎯 Objectifs Quantifiés
+| Métrique | Actuel | Objectif | Impact |
+|----------|--------|----------|--------|
+| Mémoire JVM | ~512MB/service | ~256MB/service | -50% |
+| Taille images Docker | ~200MB | ~50MB | -75% |
+| Temps démarrage | ~30s | ~10s | -67% |
+| Consommation CPU | N/A | <50% utilisation | Mesurable |
+
+### 🔄 Plan d'Action Progressif
+
+#### **Phase 1 - Quick Wins (1-2 semaines)**
+- Optimisation des Dockerfiles (images Alpine)
+- Configuration JVM avec limites mémoire
+- Mise en place du monitoring Actuator
+
+#### **Phase 2 - Optimisations Moyennes (3-4 semaines)**
+- Migration vers GraalVM Native Image
+- Implémentation du cache Redis
+- Optimisation des requêtes base de données
+
+#### **Phase 3 - Transformations Majeures (2-3 mois)**
+- Migration vers une architecture event-driven
+- Implémentation de microservices serverless
+- Optimisation complète du frontend
+
+### 📊 Outils d'Évaluation
+```bash
+# Mesure de l'empreinte carbone
+docker run -it --rm codecarbon/codecarbon
+
+# Profiling JVM
+java -XX:+FlightRecorder -XX:StartFlightRecording=duration=60s,filename=profile.jfr
+
+# Analyse des bundles frontend
+npm install --save-dev webpack-bundle-analyzer
+```
+
+### 💡 Bonnes Pratiques de Développement Green
+1. **Code Review orienté performance** : Vérifier l'efficacité énergétique
+2. **Tests de charge réguliers** : Mesurer l'impact des changements
+3. **Refactoring continu** : Supprimer le code mort et optimiser
+4. **Documentation des métriques** : Traçabilité de l'amélioration
+
+### 🌍 Impact Environnemental Estimé
+Avec l'application de ces recommandations :
+- **Réduction de 60% de la consommation mémoire**
+- **Diminution de 40% du temps de démarrage**
+- **Réduction de 50% de la taille des déploiements**
+- **Économie énergétique estimée : 30-40%**
+
+---
+
 ## 📄 Licence
 
 Ce projet est développé dans le cadre du parcours OpenClassrooms "Développeur d'application Java".
