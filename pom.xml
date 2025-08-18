@@ -9,13 +9,14 @@
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>patient-service</module>
         <module>gateway-service</module>
+        <module>patient-service</module>
         <module>note-service</module>
+        <module>diabetes-report-service</module>
     </modules>
 
     <properties>
-        <java.version>24</java.version>
+        <java.version>17</java.version>
         <spring.boot.version>3.5.4</spring.boot.version>
     </properties>
 

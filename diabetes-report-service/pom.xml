@@ -7,10 +7,10 @@
         <artifactId>projet_9_openclassrooms</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>note-service</artifactId>
+    <artifactId>diabetes-report-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>note-service</name>
-    <description>note-service</description>
+    <name>diabetes-report-service</name>
+    <description>diabetes-report-service</description>
     <url/>
     <licenses>
         <license/>
@@ -30,10 +30,6 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
@@ -46,8 +42,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
-            <version>1.18.30</version>
+            <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

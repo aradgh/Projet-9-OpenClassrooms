@@ -1,29 +1,41 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080', // Gateway
+    baseURL: 'http://localhost:8090', // Port externe du gateway
+});
+
+// Intercepteur qui ajoute le token automatiquement
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+        config.headers.Authorization = `Basic ${token}`;
+    }
+    return config;
 });
 
 export default {
     getPatients() {
         return api.get('/patients');
     },
-    getPatient(id) {
-        return api.get(`/patients/${id}`);
+    getPatient(patientId) {
+        return api.get(`/patients/${patientId}`);
     },
     createPatient(patient) {
         return api.post('/patients', patient);
     },
-    updatePatient(id, patient) {
-        return api.put(`/patients/${id}`, patient);
+    updatePatient(patientId, patient) {
+        return api.put(`/patients/${patientId}`, patient);
     },
-    deletePatient(id) {
-        return api.delete(`/patients/${id}`);
+    deletePatient(patientId) {
+        return api.delete(`/patients/${patientId}`);
     },
-    getPatientNotes(id) {
-        return api.get(`/notes/patient/${id}`);
+    getPatientNotes(patientId) {
+        return api.get(`/notes/patient/${patientId}`);
     },
     addPatientNote(note) {
         return api.post('/notes', note);
+    },
+    getDiabetesReport(patientId) {
+        return api.get(`/reports/${patientId}`);
     }
 };
