@@ -9,8 +9,8 @@ Mediscreen est une application de gestion des patients permettant le suivi et l'
 
 L'application est composée de 5 services :
 
-- **Patient Service** (Port 8081) : Gestion des informations patients (MySQL/H2)
-- **Note Service** (Port 8082) : Gestion des notes médicales (MongoDB)
+- **Patient Service** (Port 8081) : Gestion des informations patients (SQL - H2)
+- **Note Service** (Port 8082) : Gestion des notes médicales (NoSQL - MongoDB)
 - **Diabetes Report Service** (Port 8083) : Évaluation des risques diabétiques
 - **Gateway Service** (Port 8080/8090) : Point d'entrée unique pour tous les microservices
 - **Front Service** (Port 5173) : Interface utilisateur Vue.js avec Nginx
