@@ -49,7 +49,7 @@ L'application est composée de 5 services :
 
 1. **Cloner le repository**
    ```bash
-   git clone <url-du-repository>
+   git clone https://github.com/aradgh/Projet-9-OpenClassrooms.git
    cd projet9
    ```
 
