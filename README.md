@@ -312,7 +312,7 @@ CMD ["java", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 | Mémoire JVM | ~512MB/service | ~256MB/service | -50% |
 | Taille images Docker | ~200MB | ~50MB | -75% |
 | Temps démarrage | ~30s | ~10s | -67% |
-| Consommation CPU | N/A | <50% utilisation | Mesurable |
+| Consommation CPU | ~0.5% | <50% utilisation | Mesurable |
 
 ### 🔄 Plan d'Action Progressif
 
