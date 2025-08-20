@@ -9,8 +9,8 @@ Mediscreen est une application de gestion des patients permettant le suivi et l'
 
 L'application est composée de 5 services :
 
-- **Patient Service** (Port 8081) : Gestion des informations patients (MySQL/H2)
-- **Note Service** (Port 8082) : Gestion des notes médicales (MongoDB)
+- **Patient Service** (Port 8081) : Gestion des informations patients (SQL - H2)
+- **Note Service** (Port 8082) : Gestion des notes médicales (NoSQL - MongoDB)
 - **Diabetes Report Service** (Port 8083) : Évaluation des risques diabétiques
 - **Gateway Service** (Port 8080/8090) : Point d'entrée unique pour tous les microservices
 - **Front Service** (Port 5173) : Interface utilisateur Vue.js avec Nginx
@@ -49,7 +49,7 @@ L'application est composée de 5 services :
 
 1. **Cloner le repository**
    ```bash
-   git clone <url-du-repository>
+   git clone https://github.com/aradgh/Projet-9-OpenClassrooms.git
    cd projet9
    ```
 
@@ -244,6 +244,11 @@ Le Green Code vise à réduire l'impact environnemental des logiciels en optimis
 # Configuration JVM optimisée pour la production
 JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -XX:+UseStringDeduplication"
 ```
+Cette config dit à la JVM :
+- commence avec 256 Mo de heap,
+- n’utilise jamais plus de 512 Mo,
+- utilise le Garbage Collector G1 pour de bonnes perfs,
+- économise de la RAM en fusionnant les chaînes de caractères identiques.
 
 **Actions à mener :**
 - Configurer des limites mémoire appropriées pour chaque service
@@ -307,7 +312,7 @@ CMD ["java", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 | Mémoire JVM | ~512MB/service | ~256MB/service | -50% |
 | Taille images Docker | ~200MB | ~50MB | -75% |
 | Temps démarrage | ~30s | ~10s | -67% |
-| Consommation CPU | N/A | <50% utilisation | Mesurable |
+| Consommation CPU | ~0.5% | <50% utilisation | Mesurable |
 
 ### 🔄 Plan d'Action Progressif
 
