@@ -21,7 +21,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable) // API stateless
-            .authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/health").permitAll()  // optionnel
+            .headers(headers -> headers.frameOptions().sameOrigin() // Permet l'affichage en iframe pour H2
+            ).authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/health").permitAll()  // optionnel
+                .requestMatchers("/h2-console/**").permitAll() // Autoriser la console H2
                 .anyRequest().authenticated()).httpBasic(Customizer.withDefaults()); // HTTP Basic
         return http.build();
     }
