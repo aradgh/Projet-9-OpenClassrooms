@@ -244,6 +244,11 @@ Le Green Code vise à réduire l'impact environnemental des logiciels en optimis
 # Configuration JVM optimisée pour la production
 JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -XX:+UseStringDeduplication"
 ```
+Cette config dit à la JVM :
+- commence avec 256 Mo de heap,
+- n’utilise jamais plus de 512 Mo,
+- utilise le Garbage Collector G1 pour de bonnes perfs,
+- économise de la RAM en fusionnant les chaînes de caractères identiques.
 
 **Actions à mener :**
 - Configurer des limites mémoire appropriées pour chaque service
